@@ -12,14 +12,12 @@ export default class BaseDatabase<T> {
   // Utilities funciton here
 
   // Queries methods here
-
-  // Queries methods here
-  async create(query: any): Promise<any> {
-    Object.assign(query, {
+  async create(docs: any): Promise<any> {
+    Object.assign(docs, {
       ref_id: v4(),
       created_datetime_utc: new Date().toISOString(),
     })
-    return this.model.create(query)
+    return this.model.create(docs)
   }
 
   async insertMany(query: Array<any>): Promise<any> {
