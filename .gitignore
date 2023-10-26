@@ -1,7 +1,8 @@
 /node_modules/
 package-lock.json
-.env
-/dist/
 *example*
+.env
+!example.env
+/dist/
 /notes/
 /log/
