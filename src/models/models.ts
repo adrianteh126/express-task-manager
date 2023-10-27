@@ -9,4 +9,7 @@ export const commonModel = {
   created_datetime_utc: {
     type: Date,
   },
+  modified_datetime_utc: {
+    type: Date,
+  },
 }

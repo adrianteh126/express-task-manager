@@ -62,13 +62,6 @@ export default class BaseDatabase<T> {
     return result
   }
 
-  async find(query: Object = {}, sort: any, projection = {}): Promise<any> {
-    let result = await this.model.find(query, projection).sort(sort)
-    result = JSON.stringify(result)
-    result = JSON.parse(result)
-    return result
-  }
-
   async findAndCount(query: Object = {}, projection = {}): Promise<any> {
     let result = await this.model.find(query, projection).count()
     result = JSON.stringify(result)
@@ -76,28 +69,14 @@ export default class BaseDatabase<T> {
     return result
   }
 
-  async update(query: any, id: string): Promise<any> {
-    Object.assign(query, {
+  async findOneAndUpdate(payload: any, filter: object) {
+    Object.assign(payload, {
       modified_datetime_utc: new Date().toISOString(),
     })
-    return this.model.updateOne({ ref_id: id }, { $set: query })
+    return await this.model.findOneAndUpdate(filter, payload)
   }
 
-  async delete(query: object) {
+  async delete(query: object = {}) {
     return await this.model.deleteOne(query)
   }
-
-  // async getAll(): Promise<any> {
-  //   return this.model.find()
-  // }
-
-  // async getOne(): Promise<any> {
-  //   return this.model.findOne()
-  // }
-
-  // async create(): Promise<any> {}
-
-  // async update(): Promise<any> {}
-
-  // async delete(): Promise<any> {}
 }
