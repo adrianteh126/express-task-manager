@@ -31,27 +31,35 @@ export default class BaseDatabase<T> {
     return await this.model.insertMany(payload)
   }
 
-  async getCollection(
-    filter: Object,
-    sort: Object,
-    page: number = 1,
-    limit: number = 10,
-    project: Object = {}
-  ) {
-    const skip = page !== 1 ? limit * (page - 1) : 0
-    const data = await this.model
-      .find(filter, project)
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
+  // TODO : add pagination
+  // async getCollection(
+  //   filter: Object,
+  //   sort: Object,
+  //   page: number = 1,
+  //   limit: number = 10,
+  //   project: Object = {}
+  // ) {
+  //   const skip = page !== 1 ? limit * (page - 1) : 0
+  //   const data = await this.model
+  //     .find(filter, project)
+  //     .sort(sort)
+  //     .skip(skip)
+  //     .limit(limit)
 
-    const totalCount = await this.model.find(filter).count()
+  //   const totalCount = await this.model.find(filter).count()
+
+  //   return {
+  //     data: data || [],
+  //     total: totalCount || 0,
+  //     current_page: page || 1,
+  //     limit: limit || 10,
+  //   }
+  // }
+  async getCollection(filter: Object, project: Object = {}) {
+    const data = await this.model.find(filter, project)
 
     return {
       data: data || [],
-      total: totalCount || 0,
-      current_page: page || 1,
-      limit: limit || 10,
     }
   }
 

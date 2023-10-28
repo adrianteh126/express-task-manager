@@ -18,14 +18,20 @@ export const getTask: RequestHandler = async (request, response) => {
   try {
     const { id } = request.params
     const result = await taskDatabase.findOne({ ref_id: id })
-    return response.status(200).send(result)
+    if (result) {
+      return response.status(200).send(result)
+    } else {
+      return response
+        .status(200)
+        .send({ message: `No task with id ${id} found.` })
+    }
   } catch (error) {
     console.log(error)
     return response.status(500).send(error)
   }
 }
 
-// payload :
+// name : String, description : String, complete: Boolean
 export const createTask: RequestHandler = async (request, response) => {
   try {
     const payload = request.body

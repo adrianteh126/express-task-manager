@@ -1,15 +1,18 @@
 import express from "express"
-import { errorHandler } from "./errorHandler"
+import errorHandler from "./errorHandler"
 
-const app = express()
-
-app.use(express.json()) // express body parser
-app.use(
+/* Before route middleware */
+const beforeRouteMiddleware = express()
+beforeRouteMiddleware.use(express.json()) // express body parser
+beforeRouteMiddleware.use(
   express.urlencoded({
     extended: true,
     limit: "10mb",
   })
 ) // express url encoder
-app.use("/", errorHandler)
+beforeRouteMiddleware.use(errorHandler) // custom error handler
 
-export default app
+/* After route middleware */
+// TODO : add after route middleware for eror handling
+
+export { beforeRouteMiddleware }
