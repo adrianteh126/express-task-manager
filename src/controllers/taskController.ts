@@ -50,7 +50,13 @@ export const updateTask: RequestHandler = async (request, response) => {
     const result = await taskDatabase.findOneAndUpdate(payload, {
       ref_id: id,
     })
-    return response.status(200).send(result)
+    if (result) {
+      return response.status(200).send(result)
+    } else {
+      return response
+        .status(200)
+        .send({ message: `No task with id ${id} found.` })
+    }
   } catch (error) {
     console.log(error)
     response.status(500).send(error)
@@ -63,7 +69,13 @@ export const deleteTask: RequestHandler = async (request, response) => {
     const result = await taskDatabase.delete({
       ref_id: id,
     })
-    return response.status(200).send(result)
+    if (result) {
+      return response.status(200).send(result)
+    } else {
+      return response
+        .status(200)
+        .send({ message: `No task with id ${id} found.` })
+    }
   } catch (error) {
     console.log(error)
     response.status(500).send(error)
