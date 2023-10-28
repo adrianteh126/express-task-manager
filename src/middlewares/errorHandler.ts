@@ -3,12 +3,7 @@
 import { ErrorRequestHandler } from "express"
 import _ from "lodash"
 
-export const errorHandler: ErrorRequestHandler = (
-  error,
-  request,
-  response,
-  _next
-) => {
+const errorHandler: ErrorRequestHandler = (error, request, response, next) => {
   let _error = error
   if (_.get(error, "cause.cause")) _error = _.get(error, "cause.cause")
   else if (_.get(error, "cause")) _error = _.get(error, "cause")
@@ -16,3 +11,5 @@ export const errorHandler: ErrorRequestHandler = (
 
   response.status(500).send(_error)
 }
+
+export default errorHandler

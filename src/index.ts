@@ -1,8 +1,8 @@
 import express from "express"
 
-import middlewares from "./middlewares"
+import { beforeRouteMiddleware } from "./middlewares"
 import routes from "./routes"
-import connectDB from "./models/connections"
+import connectDB from "./databases/connections"
 
 const app = express()
 
@@ -10,7 +10,7 @@ const app = express()
 const port = process.env.PORT_NUMBER
 
 /* Mount middlewares or functions */
-app.use(middlewares)
+app.use(beforeRouteMiddleware)
 app.use(routes)
 
 /* Start server */
