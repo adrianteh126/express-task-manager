@@ -55,8 +55,8 @@ export default class BaseDatabase<T> {
   //     limit: limit || 10,
   //   }
   // }
-  async getCollection(filter: Object, project: Object = {}) {
-    const data = await this.model.find(filter, project)
+  async getCollection(filter: Object, sort: Object, project: Object = {}) {
+    const data = await this.model.find(filter, project).sort(sort)
 
     return {
       data: data || [],

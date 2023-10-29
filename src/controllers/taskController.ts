@@ -6,7 +6,10 @@ const taskDatabase = new TaskDatabase()
 
 export const getAllTask: RequestHandler = async (request, response) => {
   try {
-    const result = await taskDatabase.getCollection({}, {})
+    const result = await taskDatabase.getCollection(
+      {},
+      { created_datetime_utc: -1 }
+    )
     return response.status(200).send(result)
   } catch (error) {
     console.log(error)
