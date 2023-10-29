@@ -6,7 +6,10 @@ const taskDatabase = new TaskDatabase()
 
 export const getAllTask: RequestHandler = async (request, response) => {
   try {
-    const result = await taskDatabase.getCollection({}, {})
+    const result = await taskDatabase.getCollection(
+      {},
+      { created_datetime_utc: -1 }
+    )
     return response.status(200).send(result)
   } catch (error) {
     console.log(error)
@@ -50,7 +53,13 @@ export const updateTask: RequestHandler = async (request, response) => {
     const result = await taskDatabase.findOneAndUpdate(payload, {
       ref_id: id,
     })
-    return response.status(200).send(result)
+    if (result) {
+      return response.status(200).send(result)
+    } else {
+      return response
+        .status(200)
+        .send({ message: `No task with id ${id} found.` })
+    }
   } catch (error) {
     console.log(error)
     response.status(500).send(error)
@@ -63,7 +72,13 @@ export const deleteTask: RequestHandler = async (request, response) => {
     const result = await taskDatabase.delete({
       ref_id: id,
     })
-    return response.status(200).send(result)
+    if (result) {
+      return response.status(200).send(result)
+    } else {
+      return response
+        .status(200)
+        .send({ message: `No task with id ${id} found.` })
+    }
   } catch (error) {
     console.log(error)
     response.status(500).send(error)

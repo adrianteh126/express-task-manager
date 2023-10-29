@@ -18,4 +18,9 @@
 - Code refactoring: Catching error: 404
 - Deployment
 
+**_Project setup:_**
+
+1. Modify the **.env** from **example.env**.
+2. Install dependencies by `npm install`.
+
 > Credit to [Node.js Projects](https://youtu.be/rltfdjcXjmk?si=YT26EZ8Ny0S3j3SE&t=171) by [John Smilga](https://www.youtube.com/channel/UCMZFwxv5l-XtKi693qMJptA)
