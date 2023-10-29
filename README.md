@@ -22,6 +22,6 @@
 
 1. Modify the **.env** from **example.env**.
 2. Install dependencies by `npm install`.
-3. Try out the endpoints in Postman API Platform using **express-task-manager.postman_collection** in the **postman-collection** folder.
+3. Try out the endpoints in Postman API Platform using **express-task-manager-v1.postman_collection** in the **postman-collection** folder.
 
 > Credit to [Node.js Projects](https://youtu.be/rltfdjcXjmk?si=YT26EZ8Ny0S3j3SE&t=171) by [John Smilga](https://www.youtube.com/channel/UCMZFwxv5l-XtKi693qMJptA)
